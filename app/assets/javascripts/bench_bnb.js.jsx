@@ -1,6 +1,6 @@
 $(function (){
   React.render(
-    <Index />,
+    <Search />,
     document.getElementById("content")
   );
 
