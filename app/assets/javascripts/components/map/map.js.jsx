@@ -45,10 +45,19 @@ window.Map = React.createClass({
         id: bench.id
       });
       marker.setMap(this.map);
+      MarkerStore.addChangeListener(this.addHighlight);
       this.markers.push(marker);
       }
     }, this);
   },
+
+  addHighlight: function () {
+    marker.setIcon('http://maps.google.com/mapfiles/ms/icons/green-dot.png');
+  },
+
+  removeHighlight: function() {
+    
+  }
 
   setMarkerMap: function (bench, map) {
     marker.setMap(map);

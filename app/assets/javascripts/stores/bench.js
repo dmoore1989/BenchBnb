@@ -1,6 +1,6 @@
 (function (root) {
   var _benches = [];
-  var CHANGE_EVENT = 'change'
+  var CHANGE_EVENT = 'change';
   var resetBenches = function (benches) {
     _benches = benches;
   };
@@ -23,7 +23,7 @@
     },
 
     removeChangeListener: function (callback) {
-      this.remove(CHANGE_EVENT, callback);
+      this.removeListener(CHANGE_EVENT, callback);
     },
 
 
