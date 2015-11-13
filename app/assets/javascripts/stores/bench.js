@@ -4,6 +4,14 @@
   var resetBenches = function (benches) {
     _benches = benches;
   };
+  Array.prototype.findById = function (id) {
+    for (var i = 0; i < this.length; i++) {
+      if (this[i].id === id){
+        return i;
+      }
+    }
+    return -1;
+  },
 
   BenchStore = root.BenchStore = $.extend({}, EventEmitter.prototype,{
     all: function () {
@@ -17,6 +25,7 @@
     removeChangeListener: function (callback) {
       this.remove(CHANGE_EVENT, callback);
     },
+
 
     dispatcherId: ApplicationDispatcher.register(function(payload){
       if (payload.actionType === BenchConstants.BENCHES_RECEIVED) {
