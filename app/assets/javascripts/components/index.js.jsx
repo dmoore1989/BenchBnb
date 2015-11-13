@@ -5,7 +5,6 @@ window.Index = React.createClass({
 
   componentDidMount: function () {
     BenchStore.addChangeListener(this._change);
-    ApiUtil.fetchBenches();
   },
 
   _change: function () {

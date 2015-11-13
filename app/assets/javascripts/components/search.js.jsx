@@ -7,4 +7,4 @@ window.Search = React.createClass({
       </div>
     );
   }
-})
+});
