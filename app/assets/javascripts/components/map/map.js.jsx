@@ -30,12 +30,16 @@ window.Map = React.createClass({
   },
 
   _setMapMarkers: function () {
-    this.markers.forEach(function(marker, idx) {
+    var savedMarkers = []
+    this.markers.forEach(function (marker) {
       if (BenchStore.all().findById(marker.id) === -1) {
         marker.setMap(null);
-        this.markers.splice(idx, 1);
+      } else {
+        savedMarkers.push(marker);
       }
     }, this);
+
+    this.markers = savedMarkers
 
     BenchStore.all().forEach( function (bench) {
       if (this.markers.findById(bench.id) === -1) {
@@ -45,22 +49,25 @@ window.Map = React.createClass({
         id: bench.id
       });
       marker.setMap(this.map);
-      MarkerStore.addChangeListener(this.addHighlight);
       this.markers.push(marker);
       }
     }, this);
+    console.log(this.markers.length)
   },
 
-  addHighlight: function () {
-    marker.setIcon('http://maps.google.com/mapfiles/ms/icons/green-dot.png');
+
+  startAnimation: function () {
+    markers.forEach(function(marker){
+    });
   },
 
   removeHighlight: function() {
-    
-  }
 
-  setMarkerMap: function (bench, map) {
+  },
+
+  setMarkerMap: function (marker, map) {
     marker.setMap(map);
+    marker.setAnimation(google.maps.Animation.BOUNCE);
   },
 
   render: function () {
