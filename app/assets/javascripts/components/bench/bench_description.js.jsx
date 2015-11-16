@@ -1,12 +1,19 @@
 window.BenchDescription = React.createClass({
 
-  toggleMarker: function () {
-    MapAction.toggleMarker(this.props.bench);
+  markerOn: function () {
+    MapAction.markerOn(this.props.bench);
+  },
+
+  markerOff: function () {
+    MapAction.markerOff(this.props.bench)
   },
 
   render: function () {
     return (
-      <li onMouseOver={this.toggleMarker}>{this.props.bench.description}</li>
+      <li onMouseEnter={this.markerOn}
+        onMouseLeave={this.markerOff}>
+          {this.props.bench.description}
+      </li>
     );
   }
 });

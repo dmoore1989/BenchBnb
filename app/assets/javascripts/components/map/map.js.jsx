@@ -34,6 +34,8 @@ window.Map = React.createClass({
     this.markers.forEach(function (marker) {
       if (BenchStore.all().findById(marker.id) === -1) {
         marker.setMap(null);
+        MarkerStore.removeHighlightListener(this.startAnimation);
+        MarkerStore.removeUnhighlightListener(this.stopAnimation);
       } else {
         savedMarkers.push(marker);
       }
@@ -49,6 +51,8 @@ window.Map = React.createClass({
         id: bench.id
       });
       marker.setMap(this.map);
+      MarkerStore.addHighlightListener(marker, this.startAnimation);
+      MarkerStore.addUnhighlightListener(this.stopAnimation);
       this.markers.push(marker);
       }
     }, this);
@@ -56,13 +60,13 @@ window.Map = React.createClass({
   },
 
 
-  startAnimation: function () {
-    markers.forEach(function(marker){
-    });
+  startAnimation: function(marker) {
+    marker.setAnimation(google.maps.Animation.BOUNCE)
   },
 
-  removeHighlight: function() {
+  stopAnimation: function(marker) {
 
+    marker.setAnimation(null)
   },
 
   setMarkerMap: function (marker, map) {

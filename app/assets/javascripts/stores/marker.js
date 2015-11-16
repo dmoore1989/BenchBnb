@@ -1,15 +1,17 @@
 
 (function (root) {
-  var _marker;
+  var _highlightedMarker;
+  var _markers = [];
   var HIGHLIGHT = 'highlight';
   var UNHIGHLIGHT = 'unhighlight';
 
   root.MarkerStore = $.extend({}, EventEmitter.prototype, {
     highlighted: function () {
-      return _marker;
+      return _highlightedMarker;
     },
 
-    addHighlightListener: function (callback) {
+    addHighlightListener: function (marker, callback) {
+      _markers.push(marker)
       this.on(HIGHLIGHT, callback);
     },
 
@@ -21,14 +23,17 @@
       this.removeListener(HIGHLIGHT, callback);
     },
 
-    removeHighlightListener: function (callback) {
+    removeUnhighlightListener: function (callback) {
       this.removeListener(UNHIGHLIGHT, callback);
     },
 
     dispatcherId: ApplicationDispatcher.register(function (payload) {
       if (payload.actionType === BenchConstants.MARKER_HIGHLIGHT){
-        _marker = payload.bench;
-        MarkerStore.emit(CHANGE_EVENT);
+        _highlightedMarker = _markers.findById(payload.bench.id)
+        MarkerStore.emit(HIGHLIGHT, _highlightedMarker);
+      } else if (payload.actionType === BenchConstants.MARKER_UNHIGHLIGHT){
+        MarkerStore.emit(UNHIGHLIGHT, _highlightedMarker);
+        _highlightedMarker = undefined;
       }
     })
   });
