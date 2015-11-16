@@ -1,6 +1,6 @@
 window.Search = React.createClass({
-  clickMapHandler: function () {
-    this.props.history.pushState(null, '/benches/new');
+  clickMapHandler: function (coord) {
+    this.props.history.pushState(null, 'benches/new', coord);
   },
 
   render: function () {

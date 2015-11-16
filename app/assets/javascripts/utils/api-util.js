@@ -18,7 +18,7 @@ window.ApiUtil = {
       dataType: "json",
       data: bench,
       success: function (data) {
-
+        ApiAction.benchCreate(data);
       }
     });
   }

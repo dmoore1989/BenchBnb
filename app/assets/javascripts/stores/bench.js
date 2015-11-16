@@ -2,9 +2,15 @@
   var _benches = [];
   var _markers = [];
   var CHANGE_EVENT = 'change';
+
   var resetBenches = function (benches) {
     _benches = benches;
   };
+
+  var addBench = function(bench) {
+    _benches.push(bench)
+  };
+
   Array.prototype.findById = function (id) {
     for (var i = 0; i < this.length; i++) {
       if (this[i].id === id){
@@ -63,9 +69,12 @@
     },
 
 
-    dispatcherId: ApplicationDispatcher.register(function(payload){
+    dispatcherId: ApplicationDispatcher.register(function(payload) {
       if (payload.actionType === BenchConstants.BENCHES_RECEIVED) {
         resetBenches(payload.benches);
+        BenchStore.emit(CHANGE_EVENT);
+      } else if (payload.actionType === BenchConstants.BENCH_RECEIVE) {
+        addBench(payload.bench);
         BenchStore.emit(CHANGE_EVENT);
       }
     })

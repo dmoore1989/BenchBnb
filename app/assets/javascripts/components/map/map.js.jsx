@@ -25,8 +25,11 @@ window.Map = React.createClass({
       ApiUtil.fetchBenches(bounds);
     }.bind(this));
     this.map.addListener('click', function (e) {
-      coord = e.latLng;
-      this.props.clickMapHandler();
+      coord = {
+        lat: (e.latLng.lat()),
+        lng: (e.latLng.lng())
+      };
+      this.props.clickMapHandler(coord);
     }.bind(this));
   },
 
@@ -62,9 +65,6 @@ window.Map = React.createClass({
     marker.setAnimation(google.maps.Animation.BOUNCE);
   },
 
-  handleClick: function (e) {
-    debugger
-  },
 
   render: function () {
     return(
