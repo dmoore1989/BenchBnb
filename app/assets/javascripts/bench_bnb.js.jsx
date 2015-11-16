@@ -10,6 +10,7 @@ $(function (){
         <div>
           <header><h1>Bench Bnb</h1></header>
           {this.props.children}
+          <Link to="/">Return to Index</Link>
         </div>
       );
     }
@@ -19,8 +20,8 @@ $(function (){
     <Router>
       <Route path="/" component={App}>
         <IndexRoute component={Search} />
-        <Route path="/benches/new" component={BenchForm} />
-        <Route path="/benches/:id" component={BenchShow} />
+        <Route path="benches/new" component={BenchForm} />
+        <Route path="benches/:id" component={BenchShow} />
       </Route>
     </Router>,
     document.getElementById("content")

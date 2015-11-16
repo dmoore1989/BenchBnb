@@ -8,12 +8,19 @@ window.BenchDescription = React.createClass({
     MapAction.markerOff(this.props.bench);
   },
 
+  handleClick: function () {
+    debugger
+
+  },
+
   render: function () {
-    var link = "/benches/" + this.props.bench.id;
+
+    var link = "benches/" + this.props.bench.id;
     return (
       <li onMouseEnter={this.markerOn}
-        onMouseLeave={this.markerOff}>
-        <ReactRouter.Link to={link} >
+        onMouseLeave={this.markerOff}
+        >
+        <ReactRouter.Link to={link}>
             {this.props.bench.description}
         </ReactRouter.Link>
       </li>

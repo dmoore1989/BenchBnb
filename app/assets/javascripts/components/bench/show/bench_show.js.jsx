@@ -3,7 +3,8 @@ window.BenchShow = React.createClass({
     if (BenchStore.all().length === 0) {
       return ({bench: undefined});
     } else {
-      var bench = BenchStore.all().findbyId(parseInt(this.props.params.id));
+      debugger
+      var bench = BenchStore.all().findById(parseInt(this.props.params.id));
       return ({bench: bench});
     }
 
@@ -27,11 +28,11 @@ window.BenchShow = React.createClass({
           <h3>{this.state.bench.description}</h3>
           < ShowMap bench={this.state.bench} />
         </div>
-      )
+      );
     }
     else { return (
       <div></div>
-      )
+    );
     }
   }
 });

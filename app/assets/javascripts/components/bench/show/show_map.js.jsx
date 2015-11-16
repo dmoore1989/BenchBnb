@@ -7,7 +7,8 @@ window.ShowMap = React.createClass({
         lng: this.props.bench.lng
       },
       zoom: 16,
-      draggable: false
+      draggable: false,
+      scrollwheel: false
     };
     this.map = new google.maps.Map(map, mapOptions);
     marker = new google.maps.Marker({
