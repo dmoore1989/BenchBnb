@@ -2,6 +2,8 @@ window.Map = React.createClass({
   componentDidMount: function () {
     this.markers = [];
     BenchStore.addChangeListener(this._setMapMarkers);
+    MarkerStore.addHighlightListener(this.startAnimation);
+    MarkerStore.addUnhighlightListener(this.stopAnimation);
     var map = React.findDOMNode(this.refs.map);
     var mapOptions = {
       center: {lat:40.672976, lng:-73.9880051},
@@ -21,52 +23,34 @@ window.Map = React.createClass({
         }
       }};
       ApiUtil.fetchBenches(bounds);
-      this._setMapMarkers();
     }.bind(this));
   },
 
   componentWillUnmount: function () {
-    removeChangeListener(this._setMapMarkers);
+    BenchStore.removeChangeListener(this._setMapMarkers);
+    MarkerStore.removeHighlightListener(this.startAnimation);
+    MarkerStore.removeUnhighlightListener(this.stopAnimation);
   },
 
   _setMapMarkers: function () {
-    var savedMarkers = []
-    this.markers.forEach(function (marker) {
-      if (BenchStore.all().findById(marker.id) === -1) {
-        marker.setMap(null);
-        MarkerStore.removeHighlightListener(this.startAnimation);
-        MarkerStore.removeUnhighlightListener(this.stopAnimation);
-      } else {
-        savedMarkers.push(marker);
-      }
-    }, this);
+    var removalArr = BenchStore.generateRemovedMarkers();
+    for (var i = 0; i < removalArr.length; i++) {
+      removalArr[i].setMap(null);
+    }
 
-    this.markers = savedMarkers
-
-    BenchStore.all().forEach( function (bench) {
-      if (this.markers.findById(bench.id) === -1) {
-      marker = new google.maps.Marker({
-        position:{lat: bench.lat, lng: bench.lng},
-        title: bench.description,
-        id: bench.id
-      });
-      marker.setMap(this.map);
-      MarkerStore.addHighlightListener(marker, this.startAnimation);
-      MarkerStore.addUnhighlightListener(this.stopAnimation);
-      this.markers.push(marker);
-      }
-    }, this);
-    console.log(this.markers.length)
+    var newArr = BenchStore.generateNewMarkers();
+    for (var j = 0; j < newArr.length; j++) {
+      newArr[j].setMap(this.map);
+    }
   },
 
 
   startAnimation: function(marker) {
-    marker.setAnimation(google.maps.Animation.BOUNCE)
+    marker.setAnimation(google.maps.Animation.BOUNCE);
   },
 
   stopAnimation: function(marker) {
-
-    marker.setAnimation(null)
+    marker.setAnimation(null);
   },
 
   setMarkerMap: function (marker, map) {
