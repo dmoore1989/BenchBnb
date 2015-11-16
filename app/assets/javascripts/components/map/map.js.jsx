@@ -68,10 +68,13 @@ window.Map = React.createClass({
           position:{lat: bench.lat, lng: bench.lng},
           title: bench.description,
           id: bench.id,
+          clickMarker: this.props.clickMarker,
           clickable: true
         });
-
         marker.setMap(this.map);
+        marker.addListener("click", function () {
+          this.clickMarker(this.id);
+        });
         newMarkers.push(marker);
       }
     }, this);

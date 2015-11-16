@@ -21,8 +21,8 @@ window.Search = React.createClass({
   },
 
   clickMarker: function (id) {
-    link = 'benches/' + id
-    this.props.history.pushState(null, link)
+    link = 'benches/' + id;
+    this.props.history.pushState(null, link);
   },
 
   render: function () {
