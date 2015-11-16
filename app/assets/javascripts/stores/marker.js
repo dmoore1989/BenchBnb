@@ -1,13 +1,13 @@
 
 (function (root) {
-  var _highlightedMarker;
+  var _highlightedMarkerId;
   var HIGHLIGHT = 'highlight';
   var UNHIGHLIGHT = 'unhighlight';
   var UPDATE = 'UPDATE';
 
   root.MarkerStore = $.extend({}, EventEmitter.prototype, {
     highlighted: function () {
-      return _highlightedMarker;
+      return _highlightedMarkerId;
     },
 
     addHighlightListener: function (callback) {
@@ -34,11 +34,11 @@
     dispatcherId: ApplicationDispatcher.register(function (payload) {
 
       if (payload.actionType === BenchConstants.MARKER_HIGHLIGHT){
-        _highlightedMarker = BenchStore.allMarkers().findById(payload.bench.id);
-        MarkerStore.emit(HIGHLIGHT, _highlightedMarker);
+        _highlightedMarkerId = payload.marker_id
+        MarkerStore.emit(HIGHLIGHT, _highlightedMarkerId);
       } else if (payload.actionType === BenchConstants.MARKER_UNHIGHLIGHT){
-        MarkerStore.emit(UNHIGHLIGHT, _highlightedMarker);
-        _highlightedMarker = undefined;
+        MarkerStore.emit(UNHIGHLIGHT, _highlightedMarkerId);
+        _highlightedMarkerId = undefined;
       }
     })
   });

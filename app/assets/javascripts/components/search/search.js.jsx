@@ -20,10 +20,18 @@ window.Search = React.createClass({
     this.props.history.pushState(null, 'benches/new', coord);
   },
 
+  clickMarker: function (id) {
+    link = 'benches/' + id
+    this.props.history.pushState(null, link)
+  },
+
   render: function () {
      return (
       <div>
-        <Map clickMapHandler={this.clickMapHandler} />
+        <Map
+          clickMapHandler={this.clickMapHandler}
+          clickMarker={this.clickMarker}
+          />
         <Index />
         <FilterParam />
       </div>

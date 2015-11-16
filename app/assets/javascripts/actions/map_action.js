@@ -2,14 +2,14 @@ window.MapAction = {
   markerOn: function (bench) {
     ApplicationDispatcher.dispatch({
       actionType: BenchConstants.MARKER_HIGHLIGHT,
-      bench: bench
+      marker_id: bench.id
     });
   },
 
   markerOff: function (bench) {
     ApplicationDispatcher.dispatch({
       actionType: BenchConstants.MARKER_UNHIGHLIGHT,
-      bench: bench
+      marker_id: bench.id
     });
   },
 
