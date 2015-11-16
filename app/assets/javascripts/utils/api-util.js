@@ -1,5 +1,6 @@
 window.ApiUtil = {
-  fetchBenches: function (bounds) {
+  fetchBenches: function () {
+    var bounds = {bounds: FilterParamsStore.filters().bounds};
     $.ajax({
       url:"/api/benches",
       type:"GET",

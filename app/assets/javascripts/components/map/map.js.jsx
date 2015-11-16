@@ -12,7 +12,7 @@ window.Map = React.createClass({
     this.map = new google.maps.Map(map, mapOptions);
     this.map.addListener('idle', function () {
       var mapBounds = this.map.getBounds();
-      var bounds = {"bounds":{
+      var bounds = {
         "southWest":{
           "lat": mapBounds.getSouthWest().lat(),
           "lng": mapBounds.getSouthWest().lng()
@@ -21,8 +21,8 @@ window.Map = React.createClass({
           "lat": mapBounds.getNorthEast().lat(),
           "lng": mapBounds.getNorthEast().lng()
         }
-      }};
-      ApiUtil.fetchBenches(bounds);
+      };
+      FilterActions.updateBounds(bounds);
     }.bind(this));
     this.map.addListener('click', function (e) {
       coord = {
