@@ -28,12 +28,12 @@ window.Search = React.createClass({
   render: function () {
      return (
       <div>
+        <FilterParam />
         <Map
           clickMapHandler={this.clickMapHandler}
           clickMarker={this.clickMarker}
           />
         <Index />
-        <FilterParam />
       </div>
     );
   }
