@@ -25,6 +25,7 @@ window.Search = React.createClass({
       <div>
         <Map clickMapHandler={this.clickMapHandler} />
         <Index />
+        <FilterParam />
       </div>
     );
   }

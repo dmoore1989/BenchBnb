@@ -1,11 +1,11 @@
 window.ApiUtil = {
   fetchBenches: function () {
-    var bounds = {bounds: FilterParamsStore.filters().bounds};
+    var filteredItems = FilterParamsStore.filters();
     $.ajax({
       url:"/api/benches",
       type:"GET",
       dataType: "json",
-      data: bounds,
+      data: filteredItems,
       success: function(data){
         ApiAction.receiveAll(data);
       }

@@ -24,7 +24,7 @@ window.Map = React.createClass({
       };
       FilterActions.updateBounds(bounds);
     }.bind(this));
-    this.map.addListener('click', function (e) {
+    this.map.addListener('dblclick', function (e) {
       coord = {
         lat: (e.latLng.lat()),
         lng: (e.latLng.lng())

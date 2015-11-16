@@ -24,6 +24,10 @@
       if (payload.actionType === BenchConstants.BOUNDS_UPDATE){
         _filter.bounds = payload.bounds;
         FilterParamsStore.emit(UPDATE);
+      } else if (payload.actionType === BenchConstants.MINMAX_UPDATE) {
+        _filter.min = payload.minMax.min;
+        _filter.max = payload.minMax.max;
+        FilterParamsStore.emit(UPDATE);
       }
     })
   });

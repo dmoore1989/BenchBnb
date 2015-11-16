@@ -14,7 +14,7 @@ var BenchForm = React.createClass({
   submitBench: function () {
     bench = {"bench":this.state};
     ApiUtil.createBench(bench);
-    this.props.history.pushState(null, "/")
+    this.props.history.pushState(null, "/");
   },
 
 
