@@ -10,7 +10,14 @@ window.ShowMap = React.createClass({
       draggable: false
     };
     this.map = new google.maps.Map(map, mapOptions);
-
+    marker = new google.maps.Marker({
+      position:{
+        lat: this.props.bench.lat,
+        lng: this.props.bench.lng
+      },
+      title: this.props.bench.description
+    });
+    marker.setMap(this.map);
   },
 
   render: function () {
