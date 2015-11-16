@@ -8,7 +8,7 @@
   };
 
   var addBench = function(bench) {
-    _benches.push(bench)
+    _benches.push(bench);
   };
 
   Array.prototype.findById = function (id) {
